@@ -52,7 +52,7 @@ export function PolaroidCard({
       onClick={guardClick}
       aria-label={`Open project ${project.title}`}
     >
-      <span className={`clip clip--${index % 3}`} aria-hidden="true" />
+      <span className={`pin pin--${index % 3}`} aria-hidden="true" />
       <span className="polaroid__image">
         <ProjectPlaceholder project={project} />
       </span>

@@ -43,7 +43,7 @@ export function SiteHeader() {
       {isConfiguredValue(siteConfig.location) ? (
         <p className="site-location">based in {siteConfig.location}</p>
       ) : (
-        <p className="site-location">work archive · 01—16</p>
+        <span aria-hidden="true" />
       )}
     </header>
   );

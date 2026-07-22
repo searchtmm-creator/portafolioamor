@@ -137,22 +137,24 @@ export function WorkArchive() {
       <div className="archive-intro">
         <p className="eyebrow">the producer&apos;s desk · selected work</p>
         <h1 id="archive-title">
-          <span>ideas</span>
-          <em>made</em>
-          <span>real.</span>
+          <span className="archive-word archive-word--ideas">ideas</span>
+          <em className="archive-word archive-word--made">made</em>
+          <span className="archive-word archive-word--real">real.</span>
         </h1>
         <p className="archive-claim">Producing ideas people remember.</p>
         <div className="drag-note" aria-hidden="true">
           drag the work <span>↘</span>
         </div>
       </div>
-      <div className="archive-toolbar">
-        <p>16 pieces · 5 films attached</p>
-        <button type="button" onClick={resetLayout} data-testid="reset-layout">
+      <div className="archive-board" ref={scope}>
+        <button
+          className="reset-layout"
+          type="button"
+          onClick={resetLayout}
+          data-testid="reset-layout"
+        >
           reset layout
         </button>
-      </div>
-      <div className="archive-board" ref={scope}>
         <p className="sr-only">
           Sixteen project links. On desktop, cards may also be rearranged by
           dragging.

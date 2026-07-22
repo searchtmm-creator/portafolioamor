@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "[NOMBRE DE LA PRODUCTORA]",
+  name: "Nicole Borja",
   role: "Executive Producer / Advertising",
   email: "[EMAIL]",
   location: "[CIUDAD]",
