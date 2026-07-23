@@ -41,20 +41,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "The Producer's Desk",
-    description: "Producing ideas people remember.",
+    description: "Producing something that people remember",
     images: [
       {
         url: "/og.png",
         width: 1730,
         height: 909,
-        alt: "The Producer's Desk — Producing ideas people remember.",
+        alt: "The Producer's Desk — Producing something people remember.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Producer's Desk",
-    description: "Producing ideas people remember.",
+    description: "Producing something that people remember",
     images: ["/og.png"],
   },
   icons: {

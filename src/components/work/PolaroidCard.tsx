@@ -16,6 +16,8 @@ type PolaroidStyle = CSSProperties & {
   "--scale": number;
 };
 
+const magnetShapes = ["smiley", "rainbow", "heart", "daisy"] as const;
+
 export function PolaroidCard({
   project,
   index,
@@ -52,13 +54,17 @@ export function PolaroidCard({
       onClick={guardClick}
       aria-label={`Open project ${project.title}`}
     >
-      <span className={`pin pin--${index % 3}`} aria-hidden="true" />
+      <span
+        className={`magnet magnet--${magnetShapes[index % magnetShapes.length]}`}
+        aria-hidden="true"
+      />
       <span className="polaroid__image">
         <ProjectPlaceholder project={project} />
       </span>
       <span className="polaroid__caption">
-        <span className="polaroid__number">
-          archive {String(index + 1).padStart(2, "0")} / 16
+        <span className="polaroid__brand">
+          {[project.client, project.contentType].filter(Boolean).join(" · ") ||
+            "brand pending"}
         </span>
         <strong>{project.title}</strong>
         {project.externalVideoUrl ? (

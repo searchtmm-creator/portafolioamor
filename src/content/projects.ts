@@ -5,25 +5,23 @@ export type ProjectImage = {
   height?: number;
 };
 
+export type ProjectLink = {
+  label: string;
+  url: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
   client?: string;
-  year?: string;
-  category?: string;
-  role?: string;
-  agency?: string;
-  productionCompany?: string;
-  director?: string;
+  contentType?: string;
   synopsis?: string;
-  challenge?: string;
-  productionApproach?: string;
-  outcome?: string;
-  cover: string;
+  cover?: string;
   poster?: string;
   gallery: ProjectImage[];
   vimeoId?: string;
   externalVideoUrl?: string;
+  additionalVideos?: ProjectLink[];
   featured?: boolean;
   accent: "rose" | "tomato" | "cobalt" | "lemon" | "peach";
   initials: string;
@@ -34,169 +32,327 @@ export type Project = {
   };
 };
 
+type ProjectSeed = Omit<Project, "gallery" | "featured" | "polaroidLayout"> & {
+  gallery?: ProjectImage[];
+};
+
+const imageSet = (slug: string, title: string) => ({
+  cover: `/projects/${slug}/cover.jpg`,
+  gallery: [1, 2, 3].map((number) => ({
+    src: `/projects/${slug}/still-${number}.jpg`,
+    alt: `${title} — still ${number}`,
+  })),
+});
+
 const project = (
-  slug: string,
-  title: string,
-  initials: string,
-  accent: Project["accent"],
+  seed: ProjectSeed,
   desktop: Project["polaroidLayout"]["desktop"],
   tablet: Project["polaroidLayout"]["tablet"],
-  video?: Pick<Project, "vimeoId" | "externalVideoUrl">,
 ): Project => ({
-  slug,
-  title,
-  initials,
-  accent,
-  cover: `/projects/${slug}/cover.webp`,
-  poster: `/projects/${slug}/poster.webp`,
-  gallery: [],
-  featured: Boolean(video),
+  ...seed,
+  gallery: seed.gallery ?? [],
+  featured: Boolean(seed.vimeoId || seed.externalVideoUrl),
   polaroidLayout: {
     desktop,
     tablet,
     mobile: { rotation: Math.max(-3, Math.min(3, desktop.rotation / 2)) },
   },
-  ...video,
 });
 
 export const projects: Project[] = [
   project(
-    "kfc-goodometer",
-    "KFC Goodometer",
-    "KG",
-    "tomato",
-    { x: 8, y: 5, rotation: -5, scale: 1.03 },
-    { x: 5, y: 4, rotation: -4 },
-    { vimeoId: "952131096", externalVideoUrl: "https://vimeo.com/952131096" },
+    {
+      slug: "old-spice-no-seas-paloma",
+      title: "No Seas Paloma",
+      client: "Old Spice",
+      contentType: "Film",
+      initials: "OS",
+      accent: "tomato",
+      synopsis: "We shot a nonsense commercial with Advíncula for Old Spice.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=Qfj4gO_qo3M",
+      ...imageSet("old-spice-no-seas-paloma", "No Seas Paloma"),
+    },
+    { x: 3, y: 4, rotation: -5, scale: 1.03 },
+    { x: 3, y: 3, rotation: -4 },
   ),
   project(
-    "old-spice",
-    "Old Spice",
-    "OS",
-    "cobalt",
-    { x: 39, y: 2, rotation: 3 },
-    { x: 52, y: 2, rotation: 3 },
+    {
+      slug: "ke-personajes-nos-prometimos",
+      title: "Nos Prometimos",
+      client: "Ke Personajes",
+      contentType: "Music Video",
+      initials: "KP",
+      accent: "cobalt",
+      synopsis:
+        "We produced a music video for one of Argentina’s most important cumbia bands.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=h2JNzqyVYVE",
+      ...imageSet("ke-personajes-nos-prometimos", "Nos Prometimos"),
+    },
+    { x: 30, y: 7, rotation: 4 },
+    { x: 38, y: 5, rotation: 3 },
   ),
   project(
-    "bbva-nomina",
-    "BBVA Nómina",
-    "BN",
-    "rose",
-    { x: 70, y: 7, rotation: -2, scale: 1.06 },
-    { x: 28, y: 14, rotation: -2 },
+    {
+      slug: "jeffry-fischman-alejandome",
+      title: "Alejándome de Ti",
+      client: "Jeffry Fischman",
+      contentType: "Music Video",
+      initials: "JF",
+      accent: "rose",
+      synopsis:
+        "A music video produced for an MTV Award winner and founding member of the band Libido.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=wQkMVzPT1Qg",
+      ...imageSet("jeffry-fischman-alejandome", "Alejándome de Ti"),
+    },
+    { x: 50, y: 3, rotation: -3, scale: 1.06 },
+    { x: 67, y: 3, rotation: -2 },
   ),
   project(
-    "bbva-quincena-del-ahorro",
-    "BBVA La Quincena del Ahorro",
-    "BQ",
-    "lemon",
-    { x: 17, y: 25, rotation: 4 },
-    { x: 61, y: 20, rotation: 4 },
+    {
+      slug: "bbva-la-quincena-del-ahorro",
+      title: "La Quincena del Ahorro",
+      client: "BBVA",
+      contentType: "Film",
+      initials: "BB",
+      accent: "lemon",
+      synopsis:
+        "We turned a promotion into something exciting: open an account and automatically receive a gift.",
+      vimeoId: "1084344683",
+      externalVideoUrl: "https://vimeo.com/1084344683",
+      ...imageSet("bbva-la-quincena-del-ahorro", "La Quincena del Ahorro"),
+    },
+    { x: 78, y: 6, rotation: 5 },
+    { x: 5, y: 21, rotation: 4 },
   ),
   project(
-    "lofibeats",
-    "Lofibeats",
-    "LF",
-    "peach",
-    { x: 51, y: 24, rotation: -6, scale: 1.08 },
-    { x: 4, y: 31, rotation: -5 },
-    { vimeoId: "1007819738", externalVideoUrl: "https://vimeo.com/1007819738" },
+    {
+      slug: "yape-hermanos-yapean",
+      title: "Hermanos Yapean",
+      client: "Yape",
+      contentType: "Film",
+      initials: "HY",
+      accent: "peach",
+      synopsis:
+        "We told the story of how the famous orchestra Hermanos Yaipén changed its name to match the payment app Yape.",
+      vimeoId: "1212226822",
+      externalVideoUrl: "https://vimeo.com/1212226822",
+      ...imageSet("yape-hermanos-yapean", "Hermanos Yapean"),
+    },
+    { x: 6, y: 30, rotation: -6, scale: 1.08 },
+    { x: 35, y: 19, rotation: -5 },
   ),
   project(
-    "nestle-sublime",
-    "Nestlé Sublime",
-    "NS",
-    "rose",
-    { x: 79, y: 29, rotation: 5 },
-    { x: 48, y: 35, rotation: 4 },
+    {
+      slug: "puma-camiseta-sporting-cristal",
+      title: "Camiseta 88’ Sporting Cristal",
+      client: "PUMA",
+      contentType: "Film",
+      initials: "PS",
+      accent: "rose",
+      synopsis:
+        "We were part of the relaunch of Sporting Cristal’s most anticipated classic jersey.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=7G1ibJcfEn4",
+      ...imageSet(
+        "puma-camiseta-sporting-cristal",
+        "Camiseta 88’ Sporting Cristal",
+      ),
+    },
+    { x: 27, y: 26, rotation: 5 },
+    { x: 70, y: 22, rotation: 4 },
   ),
   project(
-    "hermanos-yapean",
-    "Hermanos Yapean",
-    "HY",
-    "cobalt",
-    { x: 3, y: 45, rotation: 2, scale: 1.07 },
-    { x: 68, y: 42, rotation: 2 },
-    { externalVideoUrl: "https://www.youtube.com/watch?v=uY4_3g8g3pc" },
+    {
+      slug: "kfc-streat-wear",
+      title: "StrEAT Wear",
+      client: "KFC",
+      contentType: "Activation + Content",
+      initials: "SW",
+      accent: "cobalt",
+      synopsis:
+        "We designed and produced streetwear inspired by the KFC bucket.",
+      vimeoId: "877584097",
+      externalVideoUrl: "https://vimeo.com/877584097",
+      ...imageSet("kfc-streat-wear", "StrEAT Wear"),
+    },
+    { x: 55, y: 29, rotation: 2, scale: 1.07 },
+    { x: 2, y: 35, rotation: 2 },
   ),
   project(
-    "ke-personajes-video",
-    "KE Personajes Video",
-    "KE",
-    "tomato",
-    { x: 35, y: 43, rotation: -3 },
-    { x: 18, y: 51, rotation: -3 },
-    { externalVideoUrl: "https://www.youtube.com/watch?v=h2JNzqyVYVE" },
+    {
+      slug: "kfc-lofried-beats",
+      title: "LoFried Beats",
+      client: "KFC",
+      contentType: "Activation + Content",
+      initials: "LF",
+      accent: "tomato",
+      synopsis: "Fried chicken sounds transformed into LoFi.",
+      vimeoId: "1007819738",
+      externalVideoUrl: "https://vimeo.com/1007819738",
+      ...imageSet("kfc-lofried-beats", "LoFried Beats"),
+    },
+    { x: 74, y: 31, rotation: -4 },
+    { x: 39, y: 38, rotation: -3 },
   ),
   project(
-    "yango-videos",
-    "Yango Videos",
-    "YV",
-    "lemon",
-    { x: 66, y: 49, rotation: 6 },
-    { x: 56, y: 57, rotation: 5 },
+    {
+      slug: "kfc-goodometer",
+      title: "Goodometer",
+      client: "KFC",
+      contentType: "Activation",
+      initials: "GO",
+      accent: "lemon",
+      synopsis:
+        "An AI model that measures how much a moment improves when eating KFC, tested more than 12,000 times at points of sale.",
+      vimeoId: "952131096",
+      externalVideoUrl: "https://vimeo.com/952131096",
+      ...imageSet("kfc-goodometer", "Goodometer"),
+    },
+    { x: 2, y: 49, rotation: 6 },
+    { x: 68, y: 34, rotation: 5 },
   ),
   project(
-    "kfc-nuggets-sound-test",
-    "KFC Nuggets Sound Test",
-    "KN",
-    "rose",
-    { x: 14, y: 64, rotation: -6, scale: 1.06 },
-    { x: 4, y: 66, rotation: -5 },
-    { vimeoId: "937817150", externalVideoUrl: "https://vimeo.com/937817150" },
+    {
+      slug: "on-no",
+      title: "No",
+      client: "ON",
+      initials: "ON",
+      accent: "rose",
+      synopsis: "Project details and visual assets pending.",
+      gallery: [],
+    },
+    { x: 31, y: 54, rotation: -6, scale: 1.06 },
+    { x: 6, y: 54, rotation: -5 },
   ),
   project(
-    "atun-florida",
-    "Atún Florida",
-    "AF",
-    "cobalt",
-    { x: 45, y: 64, rotation: 4 },
-    { x: 47, y: 70, rotation: 3 },
+    {
+      slug: "nestle-sublime-sonrisa",
+      title: "Sonrisa",
+      client: "Nestlé Sublime",
+      contentType: "Film",
+      initials: "NS",
+      accent: "cobalt",
+      synopsis:
+        "We showed how Peruvians can recognize the sound of a Sublime chocolate bar without seeing it.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=-ot6Xjk5cMM",
+      ...imageSet("nestle-sublime-sonrisa", "Sonrisa"),
+    },
+    { x: 50, y: 52, rotation: 4 },
+    { x: 35, y: 50, rotation: 3 },
   ),
   project(
-    "jeffry",
-    "Jeffry",
-    "JF",
-    "peach",
-    { x: 76, y: 67, rotation: -2 },
-    { x: 69, y: 77, rotation: -2 },
+    {
+      slug: "kfc-nugget-sound-test",
+      title: "Nugget Sound Test",
+      client: "KFC",
+      contentType: "Activation + Content",
+      initials: "NT",
+      accent: "peach",
+      synopsis:
+        "We invited four artists to taste KFC’s new sauces, unaware that we would transform the order of every bite into musical arrangements.",
+      vimeoId: "937817150",
+      externalVideoUrl: "https://vimeo.com/937817150",
+      additionalVideos: [
+        { label: "Song 1", url: "https://vimeo.com/937819431" },
+        { label: "Song 2", url: "https://vimeo.com/937819485" },
+      ],
+      ...imageSet("kfc-nugget-sound-test", "Nugget Sound Test"),
+    },
+    { x: 78, y: 50, rotation: -2 },
+    { x: 71, y: 54, rotation: -2 },
   ),
   project(
-    "leche-gloria",
-    "Leche Gloria",
-    "LG",
-    "tomato",
-    { x: 4, y: 82, rotation: 5 },
-    { x: 18, y: 83, rotation: 4 },
+    {
+      slug: "gloria-zero-lacto-light",
+      title: "Leche Zero Lacto Light",
+      client: "Gloria",
+      contentType: "Film",
+      initials: "GL",
+      accent: "tomato",
+      synopsis:
+        "The milk is so light that the characters float when they taste it.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=dZJ_NdeyLwk",
+      ...imageSet("gloria-zero-lacto-light", "Leche Zero Lacto Light"),
+    },
+    { x: 6, y: 76, rotation: 5 },
+    { x: 2, y: 67, rotation: 4 },
   ),
   project(
-    "atlantic-video",
-    "Atlantic Video",
-    "AV",
-    "rose",
-    { x: 32, y: 81, rotation: -4, scale: 1.04 },
-    { x: 55, y: 88, rotation: -4 },
+    {
+      slug: "atlantic-city-milloncity",
+      title: "Milloncity",
+      client: "Atlantic Casino",
+      contentType: "AI Content",
+      initials: "AC",
+      accent: "rose",
+      synopsis:
+        "We developed video game–style characters for Atlantic Casino’s four ambassadors and produced Peru’s first commercial made entirely with AI in 2026.",
+      vimeoId: "1158618206",
+      externalVideoUrl: "https://vimeo.com/1158618206",
+      ...imageSet("atlantic-city-milloncity", "Milloncity"),
+    },
+    { x: 27, y: 71, rotation: -4, scale: 1.04 },
+    { x: 39, y: 70, rotation: -4 },
   ),
   project(
-    "betsson",
-    "Betsson",
-    "BT",
-    "lemon",
-    { x: 60, y: 84, rotation: 3 },
-    { x: 4, y: 93, rotation: 3 },
+    {
+      slug: "kfc-bring-back-the-flow",
+      title: "Bring Back The Flow",
+      client: "KFC",
+      contentType: "Activation + Content",
+      initials: "BF",
+      accent: "lemon",
+      synopsis:
+        "FlowGPT sparked controversy with a viral AI-generated song that imitated Bad Bunny’s voice. When his label removed the music from every platform, we decided to bring back the flow with Colonel Sanders’ voice.",
+      vimeoId: "1040420207",
+      externalVideoUrl: "https://vimeo.com/1040420207",
+      additionalVideos: [
+        {
+          label: "Pre-launch · music video",
+          url: "https://vimeo.com/1138117525",
+        },
+      ],
+      ...imageSet("kfc-bring-back-the-flow", "Bring Back The Flow"),
+    },
+    { x: 55, y: 75, rotation: 3 },
+    { x: 67, y: 66, rotation: 3 },
   ),
   project(
-    "kfc-streetwear",
-    "KFC Streetwear",
-    "KS",
-    "cobalt",
-    { x: 80, y: 85, rotation: -5 },
-    { x: 68, y: 93, rotation: -4 },
+    {
+      slug: "atun-florida-indispensables",
+      title: "Indispensables",
+      client: "Atún Florida",
+      contentType: "Film",
+      initials: "AF",
+      accent: "cobalt",
+      synopsis:
+        "Florida celebrated its 70th anniversary with Indispensables, a campaign created by Digitas Peru to reaffirm the brand’s place in Peruvian pantries and refresh its story.",
+      externalVideoUrl: "https://www.youtube.com/watch?v=tJwoyaBXbqI",
+      ...imageSet("atun-florida-indispensables", "Indispensables"),
+    },
+    { x: 75, y: 73, rotation: -5 },
+    { x: 38, y: 80, rotation: -4 },
   ),
 ];
 
-export const getProject = (slug: string) =>
-  projects.find((item) => item.slug === slug);
+const legacyProjectSlugs: Record<string, string> = {
+  "old-spice": "old-spice-no-seas-paloma",
+  "ke-personajes-video": "ke-personajes-nos-prometimos",
+  jeffry: "jeffry-fischman-alejandome",
+  "bbva-nomina": "bbva-la-quincena-del-ahorro",
+  "bbva-quincena-del-ahorro": "bbva-la-quincena-del-ahorro",
+  "hermanos-yapean": "yape-hermanos-yapean",
+  "kfc-streetwear": "kfc-streat-wear",
+  lofibeats: "kfc-lofried-beats",
+  "kfc-nuggets-sound-test": "kfc-nugget-sound-test",
+  "leche-gloria": "gloria-zero-lacto-light",
+  "atlantic-video": "atlantic-city-milloncity",
+  "atun-florida": "atun-florida-indispensables",
+};
+
+export const getProject = (slug: string) => {
+  const canonicalSlug = legacyProjectSlugs[slug] ?? slug;
+  return projects.find((item) => item.slug === canonicalSlug);
+};
 
 export const getNextProject = (slug: string) => {
   const index = projects.findIndex((item) => item.slug === slug);

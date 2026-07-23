@@ -5,8 +5,6 @@ test("archive contains all projects and navigation works", async ({ page }) => {
   await expect(page.getByTestId("polaroid")).toHaveCount(16);
   await page.getByRole("link", { name: "bio", exact: true }).click();
   await expect(page).toHaveURL(/\/bio$/);
-  await page.getByRole("link", { name: "vimeo", exact: true }).click();
-  await expect(page).toHaveURL(/\/vimeo$/);
   await page.getByRole("link", { name: "work", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
 });
@@ -16,7 +14,7 @@ test("keyboard opens a project", async ({ page }) => {
   const first = page.getByTestId("polaroid").first();
   await first.focus();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/work\/kfc-goodometer$/);
+  await expect(page).toHaveURL(/\/work\/old-spice-no-seas-paloma$/);
 });
 
 test("invalid project uses the archive 404", async ({ page }) => {

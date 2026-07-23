@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { NextProject } from "@/src/components/project/NextProject";
 import { ProjectVideo } from "@/src/components/project/ProjectVideo";
-import { ProjectPlaceholder } from "@/src/components/ui/ProjectPlaceholder";
 import { getNextProject, getProject, projects } from "@/src/content/projects";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -18,7 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return {};
   return {
     title: project.title,
-    description: `${project.title} — project in the executive production work archive.`,
+    description:
+      project.synopsis ??
+      `${project.title} — project in the executive production work archive.`,
   };
 }
 
@@ -26,9 +26,9 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
-  const index = projects.findIndex((item) => item.slug === slug);
+  const index = projects.findIndex((item) => item.slug === project.slug);
   const previous = projects[(index - 1 + projects.length) % projects.length];
-  const next = getNextProject(slug);
+  const next = getNextProject(project.slug);
 
   return (
     <main
@@ -36,8 +36,10 @@ export default async function ProjectPage({ params }: Props) {
       id="main-content"
     >
       <nav className="project-bar" aria-label="Project navigation">
-        <Link href="/">← back to work</Link>
-        <span>{String(index + 1).padStart(2, "0")} / 16</span>
+        <Link href="/#work-board">← back to work</Link>
+        <span>
+          {String(index + 1).padStart(2, "0")} / {projects.length}
+        </span>
         <div>
           <Link
             href={`/work/${previous.slug}`}
@@ -54,43 +56,36 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </nav>
       <header className="project-hero">
-        <p className="eyebrow">
-          production folder · {String(index + 1).padStart(2, "0")}
+        <p className="project-hero__brand">
+          {project.client ?? "Brand pending"}
         </p>
         <h1>{project.title}</h1>
-        <div className="project-hero__still">
-          <ProjectPlaceholder project={project} variant="wide" />
-          <span className="project-hero__note" aria-hidden="true">
-            open the film ↓
-          </span>
-        </div>
+        {project.synopsis ? (
+          <p className="project-hero__description">{project.synopsis}</p>
+        ) : null}
       </header>
       <ProjectVideo project={project} />
-      <section className="project-notes" aria-labelledby="project-notes-title">
-        <div>
-          <p className="eyebrow">production notes</p>
-          <h2 id="project-notes-title">The folder is open.</h2>
-        </div>
-        <p>
-          Project details, production approach and credits have not been
-          supplied yet. This page is ready to reveal them without publishing
-          unverified information.
-        </p>
-      </section>
-      <section className="gallery-placeholder" aria-labelledby="gallery-title">
-        <p className="eyebrow">contact sheet</p>
-        <h2 id="gallery-title">Stills to be filed</h2>
-        <div className="contact-sheet" aria-hidden="true">
-          {[1, 2, 3].map((item) => (
-            <div key={item}>
-              <span>
-                {project.initials} / 0{item}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-      <NextProject project={next} />
+      {project.gallery.length ? (
+        <section
+          className="project-stills"
+          aria-label={`${project.title} stills`}
+        >
+          <div className="contact-sheet">
+            {project.gallery.map((image) => (
+              <figure key={image.src}>
+                {/* Assets are pre-sized during import and served directly. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

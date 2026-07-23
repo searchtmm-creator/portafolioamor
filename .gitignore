@@ -43,3 +43,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Local project source packages (the site uses optimized copies in /public/projects)
+/src/proyectos/

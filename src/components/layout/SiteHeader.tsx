@@ -7,7 +7,6 @@ import { isConfiguredValue, siteConfig } from "@/src/config/site";
 const links = [
   { href: "/", label: "work" },
   { href: "/bio", label: "bio" },
-  { href: "/vimeo", label: "vimeo" },
 ] as const;
 
 export function SiteHeader() {
@@ -15,9 +14,12 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <Link className="site-mark" href="/" aria-label="Go to work archive">
+      <Link className="site-mark" href="/" aria-label="Go to the work archive">
         <span className="site-mark__name">{siteConfig.name}</span>
-        <span className="site-mark__role">{siteConfig.role}</span>
+        <span className="site-mark__role">
+          <span className="site-mark__role-title">{siteConfig.roleTitle}</span>
+          <span className="site-mark__role-focus">{siteConfig.roleFocus}</span>
+        </span>
       </Link>
       <nav aria-label="Main navigation">
         <ul className="site-nav">

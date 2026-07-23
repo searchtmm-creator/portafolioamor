@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { isConfiguredValue, siteConfig } from "@/src/config/site";
 
 export const metadata = {
@@ -55,7 +56,8 @@ export default function BioPage() {
             ) : (
               <span>email pending</span>
             )}
-            <a href="/vimeo">watch selected films →</a>
+            <a href={`tel:${siteConfig.phoneHref}`}>{siteConfig.phone}</a>
+            <Link href="/#work-board">view selected work →</Link>
           </div>
         </article>
       </div>

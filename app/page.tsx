@@ -8,11 +8,14 @@ export default function Home() {
       <section className="contact-strip" aria-labelledby="contact-title">
         <p className="eyebrow">next production</p>
         <h2 id="contact-title">Let&apos;s make something memorable.</h2>
-        {isConfiguredValue(siteConfig.email) ? (
-          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        ) : (
-          <p className="pending-copy">contact email coming soon</p>
-        )}
+        <div className="contact-strip__details">
+          {isConfiguredValue(siteConfig.email) ? (
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          ) : (
+            <p className="pending-copy">Contact email coming soon.</p>
+          )}
+          <a href={`tel:${siteConfig.phoneHref}`}>{siteConfig.phone}</a>
+        </div>
       </section>
     </main>
   );
