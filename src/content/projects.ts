@@ -36,11 +36,13 @@ type ProjectSeed = Omit<Project, "gallery" | "featured" | "polaroidLayout"> & {
   gallery?: ProjectImage[];
 };
 
+const assetVersion = "20260724";
+
 const imageSet = (slug: string, title: string, posterNumber = 1) => ({
-  cover: `/projects/${slug}/cover.jpg`,
-  poster: `/projects/${slug}/still-${posterNumber}.jpg`,
+  cover: `/projects/${slug}/cover-${assetVersion}.jpg`,
+  poster: `/projects/${slug}/still-${posterNumber}-${assetVersion}.jpg`,
   gallery: [1, 2, 3].map((number) => ({
-    src: `/projects/${slug}/still-${number}.jpg`,
+    src: `/projects/${slug}/still-${number}-${assetVersion}.jpg`,
     alt: `${title} — still ${number}`,
   })),
 });
@@ -70,7 +72,7 @@ export const projects: Project[] = [
       initials: "OS",
       accent: "tomato",
       synopsis:
-        "We created a delightfully nonsensical Old Spice commercial starring Advíncula.",
+        "We shot a surreal film with celebrated footballer Luis Advíncula.",
       externalVideoUrl: "https://www.youtube.com/watch?v=Qfj4gO_qo3M",
       ...imageSet("old-spice-no-seas-paloma", "No Seas Paloma"),
     },
@@ -89,6 +91,8 @@ export const projects: Project[] = [
         "We produced a music video for one of Argentina’s leading cumbia bands.",
       externalVideoUrl: "https://www.youtube.com/watch?v=h2JNzqyVYVE",
       ...imageSet("ke-personajes-nos-prometimos", "Nos Prometimos", 3),
+      cover:
+        "/projects/ke-personajes-nos-prometimos/cover-20260724-v2.jpg",
     },
     { x: 30, y: 7, rotation: 4 },
     { x: 38, y: 5, rotation: 3 },
@@ -166,7 +170,7 @@ export const projects: Project[] = [
   project(
     {
       slug: "kfc-streat-wear",
-      title: "StrEAT Wear",
+      title: "Str-eat Wear",
       client: "KFC",
       contentType: "Activation + Content",
       initials: "SW",
@@ -175,7 +179,7 @@ export const projects: Project[] = [
         "We designed and produced a streetwear collection inspired by KFC’s iconic bucket.",
       vimeoId: "877584097",
       externalVideoUrl: "https://vimeo.com/877584097",
-      ...imageSet("kfc-streat-wear", "StrEAT Wear", 3),
+      ...imageSet("kfc-streat-wear", "Str-eat Wear", 3),
     },
     { x: 55, y: 29, rotation: 2, scale: 1.07 },
     { x: 2, y: 35, rotation: 2 },
@@ -208,7 +212,7 @@ export const projects: Project[] = [
         "We created an AI model that measured how much better a moment became with KFC, testing it more than 12,000 times at the point of sale.",
       vimeoId: "952131096",
       externalVideoUrl: "https://vimeo.com/952131096",
-      ...imageSet("kfc-goodometer", "Goodometer", 3),
+      ...imageSet("kfc-goodometer", "Goodometer", 2),
     },
     { x: 2, y: 49, rotation: 6 },
     { x: 68, y: 34, rotation: 5 },
@@ -216,12 +220,16 @@ export const projects: Project[] = [
   project(
     {
       slug: "on-no",
-      title: "No",
-      client: "ON",
+      title: "No!",
+      client: "On Negocios",
+      contentType: "Film",
       initials: "ON",
       accent: "rose",
-      synopsis: "Project details and visuals coming soon.",
-      gallery: [],
+      synopsis:
+        "We turned every “no” into a plot twist. ON is here to turn things around: a new internet brand built for businesses.",
+      vimeoId: "1129580010",
+      externalVideoUrl: "https://vimeo.com/1129580010",
+      ...imageSet("on-no", "No!"),
     },
     { x: 31, y: 54, rotation: -6, scale: 1.06 },
     { x: 6, y: 54, rotation: -5 },
@@ -254,10 +262,6 @@ export const projects: Project[] = [
         "We invited four artists to taste KFC’s new sauces—without telling them we would turn the sequence of every bite into a musical arrangement.",
       vimeoId: "937817150",
       externalVideoUrl: "https://vimeo.com/937817150",
-      additionalVideos: [
-        { label: "Song 1", url: "https://vimeo.com/937819431" },
-        { label: "Song 2", url: "https://vimeo.com/937819485" },
-      ],
       ...imageSet("kfc-nugget-sound-test", "Nugget Sound Test", 2),
     },
     { x: 78, y: 50, rotation: -2 },
@@ -308,12 +312,6 @@ export const projects: Project[] = [
         "FlowGPT sparked controversy with an AI-generated song that imitated Bad Bunny and became TikTok’s most viral audio. After his label removed it from every platform, we brought the flow back in Colonel Sanders’ voice.",
       vimeoId: "1040420207",
       externalVideoUrl: "https://vimeo.com/1040420207",
-      additionalVideos: [
-        {
-          label: "Pre-launch · music video",
-          url: "https://vimeo.com/1138117525",
-        },
-      ],
       ...imageSet("kfc-bring-back-the-flow", "Bring Back The Flow", 2),
     },
     { x: 55, y: 75, rotation: 3 },

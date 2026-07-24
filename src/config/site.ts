@@ -9,7 +9,7 @@ export const siteConfig = {
   location: "[CITY]",
   instagramUrl: "[INSTAGRAM_URL]",
   intro: "Producing work people remember.",
-  bio: "I’m an executive producer working across advertising, branded content, and music videos—bringing ambitious ideas to life with the right people.",
+  bio: "Executive Producer and Campaign Coordinator leading audiovisual productions, brand activations, and regional influencer marketing across Latin America.",
   bioIsPlaceholder: false,
   reelComingSoon: "More films are joining the archive soon.",
 } as const;

@@ -31,7 +31,14 @@ test("server-renders the complete work archive", async () => {
   assert.match(html, /\+52 555 500 1653/);
   assert.doesNotMatch(html, /archive 01\s*\/\s*16/i);
   assert.doesNotMatch(html, /production \/ people \/ pictures/i);
-  assert.match(html, /\/projects\/old-spice-no-seas-paloma\/cover.jpg/);
+  assert.match(
+    html,
+    /\/projects\/old-spice-no-seas-paloma\/cover-[^"]+\.jpg/,
+  );
+  assert.match(
+    html,
+    /\/projects\/ke-personajes-nos-prometimos\/cover-20260724-v2\.jpg/,
+  );
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
   assert.equal((html.match(/data-testid="polaroid"/g) ?? []).length, 16);
 });
@@ -44,9 +51,55 @@ test("server-renders a configured project film", async () => {
   assert.match(html, /turned the sounds of fried chicken into LoFi beats/);
   assert.match(html, /Play video: LoFried Beats/);
   assert.match(html, /click to play/);
-  assert.match(html, /\/projects\/kfc-lofried-beats\/still-2.jpg/);
+  assert.match(
+    html,
+    /\/projects\/kfc-lofried-beats\/still-2-[^"]+\.jpg/,
+  );
   assert.doesNotMatch(html, /project-navigation|project information|volver/i);
   assert.doesNotMatch(html, /Watch the work|open original link|LF\s*\/\s*01/i);
   assert.match(html, /href="\/#work-board"/);
   assert.doesNotMatch(html, /(?:href|src)="undefined"/);
+});
+
+for (const [path, title] of [
+  ["/work/kfc-nugget-sound-test", "Nugget Sound Test"],
+  ["/work/kfc-bring-back-the-flow", "Bring Back The Flow"],
+]) {
+  test(`server-renders one video player for ${title}`, async () => {
+    const response = await render(path);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.equal((html.match(/click to play/g) ?? []).length, 1);
+    assert.match(html, new RegExp(`Play video: ${title}`));
+  });
+}
+
+test("server-renders the complete professional bio", async () => {
+  const response = await render("/bio");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Executive Producer and Campaign Coordinator/);
+  assert.match(html, /Experience timeline/);
+  assert.match(html, /Alkimiads/);
+  assert.match(html, /Rebeca Producciones/);
+  assert.match(html, /Best Peruvian Production Company/);
+  assert.match(html, /D&amp;AD Awards/);
+  assert.match(html, /APAP Awards/);
+  assert.match(html, /El Ojo Awards/);
+  assert.match(html, /El Condor Awards/);
+  assert.match(html, /\/bio\/condor-lions-edit-20260724\.png/);
+  assert.match(html, /\/bio\/portaretrato-20260724\.jpg/);
+  assert.match(html, /\/bio\/gallery-01-20260724\.jpg/);
+  assert.match(html, /\/bio\/gallery-06-20260724\.jpg/);
+  assert.equal(
+    (html.match(/data-testid="bio-gallery-image"/g) ?? []).length,
+    6,
+  );
+  assert.doesNotMatch(html, /portrait coming soon/i);
+  assert.match(html, /🇲🇽/);
+  assert.match(html, /🇵🇪/);
+  assert.match(html, /🇪🇨/);
+  assert.match(html, /General Producer/);
+  assert.match(html, /Freelance/);
+  assert.match(html, /borja\.nicole9704@gmail\.com/);
 });
