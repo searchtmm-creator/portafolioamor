@@ -281,21 +281,6 @@ button {
   text-align: left;
 }
 
-.archive-word--real::before {
-  position: absolute;
-  top: 53%;
-  left: -0.7em;
-  z-index: 2;
-  width: 0.74em;
-  height: 3px;
-  border-radius: 70% 45% 65% 40%;
-  background: var(--cobalt-ink);
-  content: "";
-  opacity: 0.82;
-  transform: rotate(-7deg);
-  transform-origin: right center;
-}
-
 .archive-intro h1 .archive-word--made {
   position: absolute;
   top: 51%;
@@ -1299,9 +1284,6 @@ button {
     grid-row: 2;
     margin-top: -0.04em;
     text-align: right;
-  }
-  .archive-word--real::before {
-    display: none;
   }
   .archive-intro h1 .archive-word--made {
     top: 50%;
