@@ -17,7 +17,7 @@ export function ProjectVideo({ project }: { project: Project }) {
   if (!videos.length) {
     return (
       <section className="film-block film-block--empty" aria-label="Video">
-        <p>video pending</p>
+        <p>Video coming soon</p>
       </section>
     );
   }
@@ -26,15 +26,16 @@ export function ProjectVideo({ project }: { project: Project }) {
     <section className="film-block" aria-label={`${project.title} videos`}>
       <div className="video-stack">
         {videos.map((video, index) => {
-          const thumbnail =
-            project.gallery[index % project.gallery.length]?.src;
+          const thumbnail = project.poster ?? project.gallery[0]?.src;
           return (
             <div className="film-frame" key={video.embedUrl}>
               {playingIndex === index ? (
                 <iframe
                   src={video.embedUrl}
                   title={`${project.title} video ${index + 1} on ${video.provider}`}
-                  allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  loading="eager"
                   allowFullScreen
                 />
               ) : (

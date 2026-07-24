@@ -6,7 +6,7 @@ export default function Home() {
     <main id="main-content">
       <WorkArchive />
       <section className="contact-strip" aria-labelledby="contact-title">
-        <p className="eyebrow">next production</p>
+        <p className="eyebrow">Your next project</p>
         <h2 id="contact-title">Let&apos;s make something memorable.</h2>
         <div className="contact-strip__details">
           {isConfiguredValue(siteConfig.email) ? (

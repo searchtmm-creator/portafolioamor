@@ -11,22 +11,22 @@ export default function BioPage() {
   return (
     <main className="bio-page" id="main-content">
       <div className="bio-kicker">
-        <p className="eyebrow">bio · production notes</p>
-        <h1>People make pictures happen.</h1>
+        <p className="eyebrow">About · production notes</p>
+        <h1>People make great work happen.</h1>
       </div>
       <div className="bio-layout">
         <div
           className="portrait-placeholder"
           role="img"
-          aria-label="Portrait placeholder"
+          aria-label="Portrait coming soon"
         >
           <span>portrait</span>
-          <strong>to be developed</strong>
+          <strong>coming soon</strong>
           <i aria-hidden="true">↘</i>
         </div>
         <article className="bio-copy">
           <span className="blue-note" aria-hidden="true">
-            a short introduction
+            a little about me
           </span>
           <p className="bio-lead">{siteConfig.bio}</p>
           {siteConfig.bioIsPlaceholder && (
@@ -37,7 +37,7 @@ export default function BioPage() {
           <dl className="bio-details">
             <div>
               <dt>focus</dt>
-              <dd>Advertising · branded content · film production</dd>
+              <dd>Advertising · branded content · music videos</dd>
             </div>
             <div>
               <dt>role</dt>
@@ -57,7 +57,7 @@ export default function BioPage() {
               <span>email pending</span>
             )}
             <a href={`tel:${siteConfig.phoneHref}`}>{siteConfig.phone}</a>
-            <Link href="/#work-board">view selected work →</Link>
+            <Link href="/#work-board">view the work →</Link>
           </div>
         </article>
       </div>

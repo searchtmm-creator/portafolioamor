@@ -64,13 +64,13 @@ export function PolaroidCard({
       <span className="polaroid__caption">
         <span className="polaroid__brand">
           {[project.client, project.contentType].filter(Boolean).join(" · ") ||
-            "brand pending"}
+            "Brand to be announced"}
         </span>
         <strong>{project.title}</strong>
         {project.externalVideoUrl ? (
-          <span className="polaroid__status">film attached</span>
+          <span className="polaroid__status">View project</span>
         ) : (
-          <span className="polaroid__status">stills pending</span>
+          <span className="polaroid__status">Coming soon</span>
         )}
       </span>
     </Link>

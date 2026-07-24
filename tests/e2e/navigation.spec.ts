@@ -21,6 +21,6 @@ test("invalid project uses the archive 404", async ({ page }) => {
   const response = await page.goto("/work/not-a-real-folder");
   expect(response?.status()).toBe(404);
   await expect(
-    page.getByRole("heading", { name: "This folder is missing." }),
+    page.getByRole("heading", { name: "We couldn’t find this project." }),
   ).toBeVisible();
 });

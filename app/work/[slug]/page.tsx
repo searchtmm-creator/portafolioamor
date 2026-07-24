@@ -36,7 +36,7 @@ export default async function ProjectPage({ params }: Props) {
       id="main-content"
     >
       <nav className="project-bar" aria-label="Project navigation">
-        <Link href="/#work-board">← back to work</Link>
+        <Link href="/#work-board">← back to projects</Link>
         <span>
           {String(index + 1).padStart(2, "0")} / {projects.length}
         </span>
@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: Props) {
             href={`/work/${previous.slug}`}
             aria-label={`Previous project: ${previous.title}`}
           >
-            prev
+            previous
           </Link>
           <Link
             href={`/work/${next.slug}`}

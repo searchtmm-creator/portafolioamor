@@ -36,8 +36,9 @@ type ProjectSeed = Omit<Project, "gallery" | "featured" | "polaroidLayout"> & {
   gallery?: ProjectImage[];
 };
 
-const imageSet = (slug: string, title: string) => ({
+const imageSet = (slug: string, title: string, posterNumber = 1) => ({
   cover: `/projects/${slug}/cover.jpg`,
+  poster: `/projects/${slug}/still-${posterNumber}.jpg`,
   gallery: [1, 2, 3].map((number) => ({
     src: `/projects/${slug}/still-${number}.jpg`,
     alt: `${title} — still ${number}`,
@@ -68,7 +69,8 @@ export const projects: Project[] = [
       contentType: "Film",
       initials: "OS",
       accent: "tomato",
-      synopsis: "We shot a nonsense commercial with Advíncula for Old Spice.",
+      synopsis:
+        "We created a delightfully nonsensical Old Spice commercial starring Advíncula.",
       externalVideoUrl: "https://www.youtube.com/watch?v=Qfj4gO_qo3M",
       ...imageSet("old-spice-no-seas-paloma", "No Seas Paloma"),
     },
@@ -84,9 +86,9 @@ export const projects: Project[] = [
       initials: "KP",
       accent: "cobalt",
       synopsis:
-        "We produced a music video for one of Argentina’s most important cumbia bands.",
+        "We produced a music video for one of Argentina’s leading cumbia bands.",
       externalVideoUrl: "https://www.youtube.com/watch?v=h2JNzqyVYVE",
-      ...imageSet("ke-personajes-nos-prometimos", "Nos Prometimos"),
+      ...imageSet("ke-personajes-nos-prometimos", "Nos Prometimos", 3),
     },
     { x: 30, y: 7, rotation: 4 },
     { x: 38, y: 5, rotation: 3 },
@@ -100,9 +102,9 @@ export const projects: Project[] = [
       initials: "JF",
       accent: "rose",
       synopsis:
-        "A music video produced for an MTV Award winner and founding member of the band Libido.",
+        "We produced a music video for an MTV Award winner and founding member of Libido.",
       externalVideoUrl: "https://www.youtube.com/watch?v=wQkMVzPT1Qg",
-      ...imageSet("jeffry-fischman-alejandome", "Alejándome de Ti"),
+      ...imageSet("jeffry-fischman-alejandome", "Alejándome de Ti", 3),
     },
     { x: 50, y: 3, rotation: -3, scale: 1.06 },
     { x: 67, y: 3, rotation: -2 },
@@ -116,7 +118,7 @@ export const projects: Project[] = [
       initials: "BB",
       accent: "lemon",
       synopsis:
-        "We turned a promotion into something exciting: open an account and automatically receive a gift.",
+        "We transformed a simple promotion into an exciting reward: open an account and receive a gift automatically.",
       vimeoId: "1084344683",
       externalVideoUrl: "https://vimeo.com/1084344683",
       ...imageSet("bbva-la-quincena-del-ahorro", "La Quincena del Ahorro"),
@@ -133,7 +135,7 @@ export const projects: Project[] = [
       initials: "HY",
       accent: "peach",
       synopsis:
-        "We told the story of how the famous orchestra Hermanos Yaipén changed its name to match the payment app Yape.",
+        "We told the story of how the iconic orchestra Hermanos Yaipén changed its name to match Yape, the payments app.",
       vimeoId: "1212226822",
       externalVideoUrl: "https://vimeo.com/1212226822",
       ...imageSet("yape-hermanos-yapean", "Hermanos Yapean"),
@@ -150,11 +152,12 @@ export const projects: Project[] = [
       initials: "PS",
       accent: "rose",
       synopsis:
-        "We were part of the relaunch of Sporting Cristal’s most anticipated classic jersey.",
+        "We helped relaunch Sporting Cristal’s most anticipated classic jersey.",
       externalVideoUrl: "https://www.youtube.com/watch?v=7G1ibJcfEn4",
       ...imageSet(
         "puma-camiseta-sporting-cristal",
         "Camiseta 88’ Sporting Cristal",
+        2,
       ),
     },
     { x: 27, y: 26, rotation: 5 },
@@ -169,10 +172,10 @@ export const projects: Project[] = [
       initials: "SW",
       accent: "cobalt",
       synopsis:
-        "We designed and produced streetwear inspired by the KFC bucket.",
+        "We designed and produced a streetwear collection inspired by KFC’s iconic bucket.",
       vimeoId: "877584097",
       externalVideoUrl: "https://vimeo.com/877584097",
-      ...imageSet("kfc-streat-wear", "StrEAT Wear"),
+      ...imageSet("kfc-streat-wear", "StrEAT Wear", 3),
     },
     { x: 55, y: 29, rotation: 2, scale: 1.07 },
     { x: 2, y: 35, rotation: 2 },
@@ -185,10 +188,10 @@ export const projects: Project[] = [
       contentType: "Activation + Content",
       initials: "LF",
       accent: "tomato",
-      synopsis: "Fried chicken sounds transformed into LoFi.",
+      synopsis: "We turned the sounds of fried chicken into LoFi beats.",
       vimeoId: "1007819738",
       externalVideoUrl: "https://vimeo.com/1007819738",
-      ...imageSet("kfc-lofried-beats", "LoFried Beats"),
+      ...imageSet("kfc-lofried-beats", "LoFried Beats", 2),
     },
     { x: 74, y: 31, rotation: -4 },
     { x: 39, y: 38, rotation: -3 },
@@ -202,10 +205,10 @@ export const projects: Project[] = [
       initials: "GO",
       accent: "lemon",
       synopsis:
-        "An AI model that measures how much a moment improves when eating KFC, tested more than 12,000 times at points of sale.",
+        "We created an AI model that measured how much better a moment became with KFC, testing it more than 12,000 times at the point of sale.",
       vimeoId: "952131096",
       externalVideoUrl: "https://vimeo.com/952131096",
-      ...imageSet("kfc-goodometer", "Goodometer"),
+      ...imageSet("kfc-goodometer", "Goodometer", 3),
     },
     { x: 2, y: 49, rotation: 6 },
     { x: 68, y: 34, rotation: 5 },
@@ -217,7 +220,7 @@ export const projects: Project[] = [
       client: "ON",
       initials: "ON",
       accent: "rose",
-      synopsis: "Project details and visual assets pending.",
+      synopsis: "Project details and visuals coming soon.",
       gallery: [],
     },
     { x: 31, y: 54, rotation: -6, scale: 1.06 },
@@ -232,9 +235,9 @@ export const projects: Project[] = [
       initials: "NS",
       accent: "cobalt",
       synopsis:
-        "We showed how Peruvians can recognize the sound of a Sublime chocolate bar without seeing it.",
+        "We showed that Peruvians can recognize the sound of a Sublime chocolate bar without ever seeing it.",
       externalVideoUrl: "https://www.youtube.com/watch?v=-ot6Xjk5cMM",
-      ...imageSet("nestle-sublime-sonrisa", "Sonrisa"),
+      ...imageSet("nestle-sublime-sonrisa", "Sonrisa", 3),
     },
     { x: 50, y: 52, rotation: 4 },
     { x: 35, y: 50, rotation: 3 },
@@ -248,14 +251,14 @@ export const projects: Project[] = [
       initials: "NT",
       accent: "peach",
       synopsis:
-        "We invited four artists to taste KFC’s new sauces, unaware that we would transform the order of every bite into musical arrangements.",
+        "We invited four artists to taste KFC’s new sauces—without telling them we would turn the sequence of every bite into a musical arrangement.",
       vimeoId: "937817150",
       externalVideoUrl: "https://vimeo.com/937817150",
       additionalVideos: [
         { label: "Song 1", url: "https://vimeo.com/937819431" },
         { label: "Song 2", url: "https://vimeo.com/937819485" },
       ],
-      ...imageSet("kfc-nugget-sound-test", "Nugget Sound Test"),
+      ...imageSet("kfc-nugget-sound-test", "Nugget Sound Test", 2),
     },
     { x: 78, y: 50, rotation: -2 },
     { x: 71, y: 54, rotation: -2 },
@@ -269,9 +272,9 @@ export const projects: Project[] = [
       initials: "GL",
       accent: "tomato",
       synopsis:
-        "The milk is so light that the characters float when they taste it.",
+        "The milk is so light, the characters begin to float after tasting it.",
       externalVideoUrl: "https://www.youtube.com/watch?v=dZJ_NdeyLwk",
-      ...imageSet("gloria-zero-lacto-light", "Leche Zero Lacto Light"),
+      ...imageSet("gloria-zero-lacto-light", "Leche Zero Lacto Light", 2),
     },
     { x: 6, y: 76, rotation: 5 },
     { x: 2, y: 67, rotation: 4 },
@@ -285,10 +288,10 @@ export const projects: Project[] = [
       initials: "AC",
       accent: "rose",
       synopsis:
-        "We developed video game–style characters for Atlantic Casino’s four ambassadors and produced Peru’s first commercial made entirely with AI in 2026.",
+        "We developed video game–inspired characters for Atlantic Casino’s four ambassadors and produced Peru’s first fully AI-generated commercial of 2026.",
       vimeoId: "1158618206",
       externalVideoUrl: "https://vimeo.com/1158618206",
-      ...imageSet("atlantic-city-milloncity", "Milloncity"),
+      ...imageSet("atlantic-city-milloncity", "Milloncity", 3),
     },
     { x: 27, y: 71, rotation: -4, scale: 1.04 },
     { x: 39, y: 70, rotation: -4 },
@@ -302,7 +305,7 @@ export const projects: Project[] = [
       initials: "BF",
       accent: "lemon",
       synopsis:
-        "FlowGPT sparked controversy with a viral AI-generated song that imitated Bad Bunny’s voice. When his label removed the music from every platform, we decided to bring back the flow with Colonel Sanders’ voice.",
+        "FlowGPT sparked controversy with an AI-generated song that imitated Bad Bunny and became TikTok’s most viral audio. After his label removed it from every platform, we brought the flow back in Colonel Sanders’ voice.",
       vimeoId: "1040420207",
       externalVideoUrl: "https://vimeo.com/1040420207",
       additionalVideos: [
@@ -311,7 +314,7 @@ export const projects: Project[] = [
           url: "https://vimeo.com/1138117525",
         },
       ],
-      ...imageSet("kfc-bring-back-the-flow", "Bring Back The Flow"),
+      ...imageSet("kfc-bring-back-the-flow", "Bring Back The Flow", 2),
     },
     { x: 55, y: 75, rotation: 3 },
     { x: 67, y: 66, rotation: 3 },
@@ -325,9 +328,9 @@ export const projects: Project[] = [
       initials: "AF",
       accent: "cobalt",
       synopsis:
-        "Florida celebrated its 70th anniversary with Indispensables, a campaign created by Digitas Peru to reaffirm the brand’s place in Peruvian pantries and refresh its story.",
+        "To celebrate its 70th anniversary, Florida launched Indispensables, a campaign by Digitas Peru that reaffirmed the brand’s place in Peruvian pantries and refreshed its story.",
       externalVideoUrl: "https://www.youtube.com/watch?v=tJwoyaBXbqI",
-      ...imageSet("atun-florida-indispensables", "Indispensables"),
+      ...imageSet("atun-florida-indispensables", "Indispensables", 2),
     },
     { x: 75, y: 73, rotation: -5 },
     { x: 38, y: 80, rotation: -4 },

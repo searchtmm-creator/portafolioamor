@@ -148,21 +148,18 @@ export function WorkArchive() {
     <section className="archive-section" aria-labelledby="archive-title">
       <div className="archive-intro">
         <div className="archive-composition">
-          <p className="eyebrow">Welcome to my Work collection</p>
+          <p className="eyebrow">Welcome to my work collection</p>
           <h1 id="archive-title">
             <span className="archive-word archive-word--ideas">ideas</span>
             <em className="archive-word archive-word--made">made</em>
             <span className="archive-word archive-word--real">real.</span>
           </h1>
-          <p className="archive-claim">
-            Producing something that people remember
-          </p>
+          <p className="archive-claim">Producing work people remember.</p>
         </div>
       </div>
       <div className="archive-board" id="work-board" ref={scope}>
         <div className="drag-note" aria-hidden="true">
-          <span>drag and explore</span>
-          <i className="hand-arrow hand-arrow--to-old-spice" />
+          <span>drag to explore</span>
         </div>
         <button
           className="reset-layout"
@@ -184,12 +181,11 @@ export function WorkArchive() {
             wasDragged={() => dragged.current}
           />
         ))}
-        <span
-          className="archive-scribble archive-scribble--one"
-          aria-hidden="true"
-        >
-          ✳
-        </span>
+        <div className="archive-scribbles" aria-hidden="true">
+          {Array.from({ length: 16 }, (_, index) => (
+            <span key={index}>✳</span>
+          ))}
+        </div>
       </div>
     </section>
   );

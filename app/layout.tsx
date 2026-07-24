@@ -26,35 +26,35 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
   title: {
-    default: "The Producer's Desk",
-    template: "%s · The Producer's Desk",
+    default: "Nicole Borja — Executive Producer",
+    template: "%s · Nicole Borja",
   },
   description:
-    "Executive production portfolio for advertising, branded content and film.",
-  applicationName: "The Producer's Desk",
+    "Nicole Borja’s executive production portfolio for advertising, branded content, and music videos.",
+  applicationName: "Nicole Borja — Executive Producer",
   keywords: [
     "executive producer",
     "advertising production",
-    "film production",
+    "music video production",
     "portfolio",
   ],
   openGraph: {
     type: "website",
-    title: "The Producer's Desk",
-    description: "Producing something that people remember",
+    title: "Nicole Borja — Executive Producer",
+    description: "Producing work people remember.",
     images: [
       {
         url: "/og.png",
         width: 1730,
         height: 909,
-        alt: "The Producer's Desk — Producing something people remember.",
+        alt: "Nicole Borja — executive production portfolio.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Producer's Desk",
-    description: "Producing something that people remember",
+    title: "Nicole Borja — Executive Producer",
+    description: "Producing work people remember.",
     images: ["/og.png"],
   },
   icons: {
