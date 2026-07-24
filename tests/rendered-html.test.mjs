@@ -29,6 +29,7 @@ test("server-renders the complete work archive", async () => {
   assert.match(html, /Old Spice · Film/);
   assert.match(html, /borja\.nicole9704@gmail\.com/);
   assert.match(html, /\+52 555 500 1653/);
+  assert.match(html, /\/favicon-nb\.svg/);
   assert.doesNotMatch(html, /archive 01\s*\/\s*16/i);
   assert.doesNotMatch(html, /production \/ people \/ pictures/i);
   assert.match(
@@ -74,6 +75,14 @@ for (const [path, title] of [
   });
 }
 
+test("server-renders the corrected Milloncity campaign year", async () => {
+  const response = await render("/work/atlantic-city-milloncity");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /fully AI-generated commercial of 2025/);
+  assert.doesNotMatch(html, /fully AI-generated commercial of 2026/);
+});
+
 test("server-renders the complete professional bio", async () => {
   const response = await render("/bio");
   assert.equal(response.status, 200);
@@ -91,6 +100,8 @@ test("server-renders the complete professional bio", async () => {
   assert.match(html, /\/bio\/portaretrato-20260724\.jpg/);
   assert.match(html, /\/bio\/gallery-01-20260724\.jpg/);
   assert.match(html, /\/bio\/gallery-06-20260724\.jpg/);
+  assert.match(html, /data-gallery-placement="desktop"/);
+  assert.match(html, /data-gallery-placement="mobile"/);
   assert.equal(
     (html.match(/data-testid="bio-gallery-image"/g) ?? []).length,
     6,

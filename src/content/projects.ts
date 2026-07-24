@@ -292,7 +292,7 @@ export const projects: Project[] = [
       initials: "AC",
       accent: "rose",
       synopsis:
-        "We developed video game–inspired characters for Atlantic Casino’s four ambassadors and produced Peru’s first fully AI-generated commercial of 2026.",
+        "We developed video game–inspired characters for Atlantic Casino’s four ambassadors and produced Peru’s first fully AI-generated commercial of 2025.",
       vimeoId: "1158618206",
       externalVideoUrl: "https://vimeo.com/1158618206",
       ...imageSet("atlantic-city-milloncity", "Milloncity", 3),

@@ -130,6 +130,35 @@ const galleryImages = [
   },
 ] as const;
 
+function BioGallery({ placement }: { placement: "desktop" | "mobile" }) {
+  return (
+    <div
+      className={`bio-gallery bio-gallery--${placement}`}
+      data-gallery-placement={placement}
+      aria-label="Behind the scenes gallery"
+    >
+      {galleryImages.map((image, index) => (
+        <figure
+          className="bio-gallery__photo"
+          data-testid={
+            placement === "desktop" ? "bio-gallery-image" : undefined
+          }
+          key={image.src}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={image.src}
+            alt={`Nicole Borja behind the scenes — ${index + 1}`}
+            width={image.width}
+            height={image.height}
+            loading="lazy"
+          />
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 export default function BioPage() {
   return (
     <main className="bio-page" id="main-content">
@@ -153,24 +182,7 @@ export default function BioPage() {
               <i aria-hidden="true">↖</i>
             </figcaption>
           </figure>
-          <div className="bio-gallery" aria-label="Behind the scenes gallery">
-            {galleryImages.map((image, index) => (
-              <figure
-                className="bio-gallery__photo"
-                data-testid="bio-gallery-image"
-                key={image.src}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={image.src}
-                  alt={`Nicole Borja behind the scenes — ${index + 1}`}
-                  width={image.width}
-                  height={image.height}
-                  loading="lazy"
-                />
-              </figure>
-            ))}
-          </div>
+          <BioGallery placement="desktop" />
         </div>
         <article className="bio-copy">
           <p className="bio-lead">{siteConfig.bio}</p>
@@ -236,6 +248,8 @@ export default function BioPage() {
               ))}
             </ol>
           </section>
+
+          <BioGallery placement="mobile" />
 
           <section
             className="bio-section bio-section--recognition"

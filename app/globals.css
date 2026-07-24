@@ -1060,6 +1060,9 @@ button {
   gap: clamp(0.8rem, 2vw, 1.4rem);
   margin-top: 7rem;
 }
+.bio-gallery--mobile {
+  display: none;
+}
 .bio-gallery__photo {
   align-self: start;
   margin: 0;
@@ -1525,10 +1528,7 @@ button {
     transform: none;
   }
   .drag-note {
-    top: 0.95rem;
-    left: 22vw;
-    gap: 0.35rem;
-    font-size: 1rem;
+    display: none;
   }
 
   .archive-board {
@@ -1536,12 +1536,11 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.8rem 0.8rem;
     min-height: auto;
-    padding: 5.5rem 1rem 6rem;
+    padding: 3.5rem 1rem 6rem;
     overflow: visible;
   }
   .reset-layout {
-    top: 0.85rem;
-    right: 1.2rem;
+    display: none;
   }
   .polaroid,
   .polaroid:nth-of-type(3n + 2),
@@ -1610,9 +1609,17 @@ button {
   }
   .blue-note {
     right: 0;
+    bottom: -2.7rem;
   }
-  .bio-gallery {
-    margin-top: 6.5rem;
+  .blue-note i {
+    display: none;
+  }
+  .bio-gallery--desktop {
+    display: none;
+  }
+  .bio-gallery--mobile {
+    display: grid;
+    margin: 2.5rem 0 4rem;
   }
   .bio-details div {
     grid-template-columns: 5rem 1fr;
